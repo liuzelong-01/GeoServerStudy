@@ -198,7 +198,8 @@ function addDtMarkerByZoom(zoom, latitude, longitude) {
 }
 
 export default {
-    tianDiTukey: "857a886d04222c02a303959a4bc31f00",
+    // tianDiTukey: "857a886d04222cc02a303959a4bc31f00",//COMcc-c
+    tianDiTukey: "5cbe4a995521d3fb7bffdd1ae686ea18",//TEST
     centerPoint: [31.98796,112.123228],
     ciLayer: [], // 海量点位图层
     airLayers: null,
