@@ -97,14 +97,8 @@ async function readyMap(mapContainerId) {
 
 // 深泽县边界线
 function initDszLayer() {
-    let areaOptions = {
-        layers: 'hubei',
-        format: 'image/png',
-        transparent: true,
-        minZoom: 6,
-        maxZoom: 21,
-    };
-    L.tileLayer.wms(IPConfig.hubeiUrl, areaOptions).addTo(this.map);
+    L.tileLayer.wms(IPConfig.dszRivers,{layers:'dszRivers:dszRiverWaterPipe',format: 'image/png',transparent: true,minZoom: 6,maxZoom: 21}).addTo(this.map);
+    L.tileLayer.wms(IPConfig.xys,{layers:'xys:xysGroup',format: 'image/png',transparent: true,minZoom: 6,maxZoom: 21}).addTo(this.map);
 }
 
 function removeLayers() {
