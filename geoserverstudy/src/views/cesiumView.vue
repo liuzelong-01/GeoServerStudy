@@ -16,7 +16,7 @@ export default{
       heightLimit:1500,
       clearSet:new Set(),
       camOrigin: {
-        pos: new Cesium.Cartesian3(-2142665.421788752, 4555188.252507338, 3911660.4514494464),
+        // pos: new Cesium.Cartesian3(-2142665.421788752, 4555188.252507338, 3911660.4514494464),
         direction : new Cesium.Cartesian3(0.3712932559230822, -0.7538693420697009, 0.5420538102379072),
         up : new Cesium.Cartesian3(-0.22619159040522838, 0.4927620717941341, 0.8402516914776823)
       },
@@ -77,6 +77,8 @@ export default{
       ];
      // env.addModel();
 
+     var position = Cesium.Cartesian3.fromDegrees(112.469434,32.364355,900)
+     this.camOrigin.pos = {x:position.x , y:position.y , z:position.z}
       viewer.camera.flyTo({
         destination: this.camOrigin.pos,
         orientation : {
