@@ -101,6 +101,51 @@ export default {
 
       // 开始高程遮挡效果 
       viewer.scene.globe.depthTestAgainstTerrain = true;
+
+      //添加地图取点
+      viewer.screenSpaceEventHandler.setInputAction(function onLeftClick(movement) {
+        const { position } = movement//屏幕坐标
+        //屏幕坐标转笛卡尔
+        const ray = viewer.camera.getPickRay(position)
+        const cartesian3 = viewer.scene.globe.pick(ray, viewer.scene)
+        //笛卡尔坐标转经纬度
+        const radians = viewer.scene.globe.ellipsoid.cartesianToCartographic(cartesian3);
+        const lat = Cesium.Math.toDegrees(radians.latitude); //弧度转度
+        const lng = Cesium.Math.toDegrees(radians.longitude);
+        const alt = radians.height;
+        console.log(lng, lat, alt, '经纬度高度')
+
+      }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+
+      //添加点位
+      let params = {
+        id: 10086,
+        lon: 112.46483483748143,
+        lat: 32.36690289478925,
+        alt: 59.56901707132832
+      }
+
+      let entity = new Cesium.Entity({
+        id: params.id || `${params.lon}点`,
+        name: params.name || '点',
+        show: true,
+        position: Cesium.Cartesian3.fromDegrees(params.lon, params.lat, params.alt+0.5),
+        point: new Cesium.PointGraphics({
+          show: true,
+          pixelSize: 10,
+          heightReference: Cesium.HeightReference.clampToGround,
+          color: params.color || new Cesium.Color(255, 255, 0, 1),
+          outlineColor: params.color || new Cesium.Color(0, 0, 0, 0),
+          outlineWidth: params.outlineWidth || 0,
+          scaleByDistance: params.scaleByDistance || new Cesium.NearFarScalar(0, 1, 5e10, 1),
+          translucencyByDistance: params.translucencyByDistance || new Cesium.NearFarScalar(0, 1, 5e10, 1),
+          distanceDisplayCondition: params.translucencyByDistance || new Cesium.DistanceDisplayCondition(0, 4.8e10),
+          disableDepthTestDistance:50000
+        })
+      });
+      viewer.entities.add(entity);
+
+      console.log(entity,'entity')
     },
   },
 
