@@ -65,7 +65,7 @@ export default {
 
 
       viewer.scene.screenSpaceCameraController.minimumZoomDistance = 10;
-      viewer.scene.screenSpaceCameraController.maximumZoomDistance = 50000;
+      viewer.scene.screenSpaceCameraController.maximumZoomDistance = 500000;
       viewer.scene.screenSpaceCameraController.tiltEventTypes = [
         Cesium.CameraEventType.RIGHT_DRAG, Cesium.CameraEventType.PINCH,
         { eventType: Cesium.CameraEventType.LEFT_DRAG, modifier: Cesium.KeyboardEventModifier.CTRL },
